@@ -1,14 +1,9 @@
 # middleman
 
-A Clojure library designed to ... well, that part is up to you.
+Just a simple middleweare for the weathercloud api in Clojure.
+Serves as an example on building a middlewere.
+Will hit Weathercloud get data and send it to another server. nothing fancy just playing with clojure
 
-## Usage
 
-FIXME
 
-## License
 
-Copyright © 2017 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
