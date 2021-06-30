@@ -34,19 +34,19 @@
 (defn parse-weathercloud-to-ours [{:keys [device values]} messageNumber]
   "converts weather cloud data to raw data for stationId"
   (hash-map
-    :date (todays-date), ;temperature
-    :api_key "01125481799", ;humidiy
-    :earthHumidity (get values :hum), ;presure
-    :rain (get values :rain), ;rain
-    :wind_speed_count "3600", ; wind speed
-    :wind_speed_sum (str (to_wind_speed_count (Double/parseDouble (get values :wspdavg)))), ;wind gust
-    :wind_vane (get values :wdiravg), ; wind gust
-    :pressure, (get values :bar); voltage
+    :date (todays-date),
+    :api_key "01125481799",
+    :earthHumidity (get values :hum),
+    :rain (get values :rain),
+    :wind_speed_count "3600",
+    :wind_speed_sum (str (to_wind_speed_count (Double/parseDouble (get values :wspdavg)))),
+    :wind_vane (get values :wdiravg),
+    :pressure, (get values :bar),
     :temperature (get values :temp),
     :humidity (get values :hum),
-    :earthTemperature (get values :temp) ; Earth Humidiy
-    :wind_gust "4"
-    :battery "4059"
+    :earthTemperature (get values :temp),
+    :wind_gust "4",
+    :battery "4059",
     :messageNumber (str messageNumber)))
 
 (defn to-hashmap [data]
@@ -66,7 +66,7 @@
      }))
 
 (defn make-request [stationId messageNumber] 
-  "returns wetherApp request() payload"
+  "Given a weathercloud id make a request and pass it on to server parsed"
   (-> stationId
       request-weathercloud
       to-hashmap
