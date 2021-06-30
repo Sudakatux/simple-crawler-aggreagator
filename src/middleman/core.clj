@@ -7,7 +7,6 @@
 (def weatherCloudApiURL "https://app.weathercloud.net/device/info/")
 (def weatherAppRawDataUrl "http://localhost:8082/api/c/rawdata/")
 
-(def expected-date-format )
 
 (defn build-url [stationId]
 (apply str [weatherCloudApiURL stationId]))
@@ -25,12 +24,6 @@
   (let [km_hour (* metersPerSecond 3.6)]
     (int (* km_hour 3600))))
 
-;(defn one-hour-sequence-from-now []
-;  (let [now (atom (java.time.Instant/now))]
-;    (repeatedly
-;      (fn []
-;        (swap! now #(.plus % 1 java.time.temporal.ChronoUnit/MINUTES))))
-                                        ;    ))
 (defn one-hour-sequence-from-now []
   (chime/periodic-seq (java.time.Instant/now) (java.time.Duration/ofHours 1)))
 
@@ -92,36 +85,4 @@
   [stationId]
   (println (str "Running every hour for stationID=" stationId))
   (call-station-every stationId))
-
-(comment
-  ;(make-request )
-
-                                       ; (get @(create-request "0576509888") :body)
-;; => nil
-;  (:status @(http/get (build-url "0576509888") {
-;:headers {"X-Requested-With" "XMLHttpRequest" }
-;                                                } ))
-;; => 200
-;; => 405
-(to_wind_speed_count 3.3)
-;; => 42768.0
-;(create-request "0576509888")
-;(Double/parseDouble (get  (parse-weathercloud-to-ours (json/read-str (create-request "0576509888") :key-fn keyword)) :wspdavg))
-
-
-                                        ;(let  [ {:keys [values]} (json/read-str (create-request "0576509888") :key-fn keyword) ]
-;values
- ; )
-;; => {:dew "1.7", :temp "4.5", :solarrad "0.0", :wspdavg "2.4", :bar "1029.2", :rainrate "0.0", :uvi "0.0", :hum "82", :wdiravg "281", :rain "0.0"}
- ;; => "{\"device\":{\"account\":0,\"status\":\"2\",\"city\":\"Federal\",\"image\":null,\"favorite\":false,\"social\":false,\"altitude\":\"68.0\",\"update\":383},\"values\":{\"temp\":\"7.1\",\"hum\":\"71\",\"dew\":\"2.2\",\"wspdavg\":\"2.8\",\"wdiravg\":\"269\",\"bar\":\"1026.9\",\"rain\":\"0.0\",\"rainrate\":\"0.0\",\"solarrad\":\"0.0\",\"uvi\":\"0.0\"}}"
- ;; => nil
-;; => nil
-(take 4 (one-hour-sequence-from-now))
-(call-station-every "0576509888")
- (todays-date ))
-
-
-
-
-
 
